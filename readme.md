@@ -11,13 +11,8 @@ For more details, please view the paper [Insert URL]().
 ### Results
 Figures of the sum rates in the paper are found in the folder [sumRates](./sumRates/). Please look at folder [lossCurves](./lossCurves/Fig3/) to know the loss rates of `Fig. 3` in the paper. The hyperparameters follow all figures presented in the paper. 
 
-Please modify `N` in [NNUtils.py](./NNUtils.py) and [plot.py](./plot.py) to reproduce all figures in the paper.
+Please modify `N` in [NNUtils.py](./NNUtils.py) and respective `python` `plot` files to reproduce all figures in the paper.
 
-To reproduce `Fig. 5`, use the following set up in the function `parameters` of [NNUtils.py](./NNUtils.py).
-```python
-end = totalUser
-M =  random.randint(0, end)
-```
 
 ### Run
 **0.Requirements**
