@@ -17,16 +17,19 @@ print("Loading...")
 
 # --------------------------- Start --------------------------------
 snrFixed = fiexdSNR()
-Nt, N, _, _, _, _, _ = parameters(6) # 6 is just a placeholder
+
 
 global_ymin = 0
 global_ymax = 100
 
 
 # load the data
+rateNNSuper30 = np.load(f'Plotting/10users/sumRateSuperN30model.npy')
 
-rateNNSuper10 = np.load(f'Plotting/10users/sumRateSuper.npy')
-rateZF10 = np.load(f'Plotting/10users/sumRateZF.npy')
+rateNNSuper60 = np.load(f'Plotting/10users/sumRateSuperN60model.npy')
+rateZF60 = np.load(f'Plotting/10users/sumRateZFN60.npy')
+
+rateNNSuper120 = np.load(f'Plotting/10users/sumRateSuperN120model.npy')
 
 print('Loading...')
 linePrint()
@@ -35,9 +38,13 @@ plt.figure(figsize=(7, 6))
 
 
 # Plot lines
+plottingLine(rateZF60, 'ZF-SBF [N = 60]', 'dashed', 'green', '+')
+plottingLine(rateNNSuper120, 'Proposed [N = 120]', 'solid', 'blue', '|')
 
-plottingLine(rateZF10, 'ZF-SBF [M+K=10]', 'dashed', 'green', '+')
-plottingLine(rateNNSuper10, 'Proposed [M+K=10]', 'solid', 'green', 'o')
+plottingLine(rateNNSuper60, 'Proposed [N = 60]', 'solid', 'green', 'x')
+
+plottingLine(rateNNSuper30, 'Proposed [N = 30]', 'solid', 'red', '1')
+
 
 # Legend
 plt.legend(loc='upper left', ncol=1, fontsize=13)
@@ -49,11 +56,13 @@ plt.xlabel(r'$P_{\mathrm{tot}}/\sigma_n^2$ (dB)', fontsize=12)
 plt.ylabel('Sum rate (bps/Hz)', fontsize=13)
 
 # Title
-plt.title(r'$N_t$ = {}, N = {}'.format(Nt, N), fontsize=13)
+Nt = 16
+totalUsers = 10
+plt.title(r'$N_t$ = {}, $M + K$ = {}'.format(Nt, totalUsers), fontsize=13)
 
 plt.grid(True) 
 plt.tight_layout()  # Adjust layout to prevent clipping of legend
-plt.savefig(f'Plotting/sumRateComparison.png')  
+plt.savefig(f'Plotting/sumRateComparisonTrainedAtN60TestedwithDiffN.png')  
 plt.close()
 
 print("Done!")

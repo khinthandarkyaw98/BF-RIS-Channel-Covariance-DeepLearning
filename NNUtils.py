@@ -13,24 +13,25 @@ from textwrap import wrap
 
 def linePrint():
   print('=' * 50)
-  
-def LagrangeMultiplier():
-  lagrangeMultiplier =  1e-3
-  return lagrangeMultiplier
 
 def fiexdSNR():
   snr = [-5, 0, 5, 10, 15, 20] # dB
   return snr
 
 def totalUsersFunc():
-  totalUsers = [10] #[6, 8, 10]
+  #totalUsers = [6, 8, 10]  # figure 2
+  totalUsers = [10] # figure 3
   return totalUsers
 
 def parameters(totalUser):
   Nt = 16 # Nt = antenna_size
-  N = 60 # N = No. of patches on each IRS
-  start = totalUser - 3
-  M =  random.randint(start, totalUser - 1)
+  N = 30 # N = No. of patches on each IRS # figure 2, figure 3
+  #N = 60 # N = No. of patches on each IRS # figure 3
+  #N = 120 # N = No. of patches on each IRS # figure 3
+  #start = totalUser - 3
+  #M =  random.randint(start, totalUser - 1)
+  end = totalUser
+  M =  random.randint(0, end) # M = direct user_size
   K = totalUser - M # K = IRS-assisted user_size
   while True:
     Lm = np.random.randint(1, 2, size=M) # Lm = path between BS and user
