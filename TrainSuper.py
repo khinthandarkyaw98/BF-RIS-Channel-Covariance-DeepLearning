@@ -96,10 +96,10 @@ for userSize in totalUsers:
   beam = layers.Lambda(computeBeam, 
                         dtype=tf.complex64, 
                         output_shape=(userSize, antennaSize, 1))([individualPowerOutput, 
-                                                                  individualBetaOutput, 
-                                                                  eMaxComplexInput, 
-                                                                  identityMatrixInput, 
-                                                                  covarianceComplexInput])
+                          individualBetaOutput, 
+                          eMaxComplexInput, 
+                          identityMatrixInput, 
+                          covarianceComplexInput])
   loss = layers.Lambda(lossFuncSuper, 
                         dtype=tf.float32, 
                         output_shape=(1,))([covarianceComplexInput, beam])
@@ -136,7 +136,10 @@ for userSize in totalUsers:
                                                     mode='min', 
                                                     restore_best_weights=True)
 
-  history = model.fit(x=[covarianceStacked, PowerTotal, identityMatrix, covarianceComplex, eMaxComplex, eMaxStacked], y=covarianceComplex, # Dummy target
+  history = model.fit(x=[covarianceStacked, PowerTotal, 
+                         identityMatrix, covarianceComplex, 
+                         eMaxComplex, eMaxStacked], 
+                      y=covarianceComplex, # Dummy target
                       batch_size=batchSize,
                       epochs=500,
                       verbose=2,

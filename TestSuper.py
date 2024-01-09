@@ -93,10 +93,10 @@ for userSize in totalUsers:
   beam = layers.Lambda(computeBeam, 
                         dtype=tf.complex64, 
                         output_shape=(userSize, antennaSize, 1))([individualPowerOutput, 
-                                                                  individualBetaOutput, 
-                                                                  eMaxComplexInput, 
-                                                                  identityMatrixInput, 
-                                                                  covarianceComplexInput])
+                          individualBetaOutput, 
+                          eMaxComplexInput, 
+                          identityMatrixInput, 
+                          covarianceComplexInput])
   loss = layers.Lambda(lossFuncSuper, 
                         dtype=tf.float32, 
                         output_shape=(1,))([covarianceComplexInput, beam])
@@ -122,7 +122,8 @@ for userSize in totalUsers:
       self.save_path2 = save_path2
       
     def on_test_end(self, logs=None):
-      powerBetaModel = keras.Model(inputs=[covarianceStackedInput, powerTotalInput, eMaxStackedInput], 
+      powerBetaModel = keras.Model(inputs=[covarianceStackedInput, 
+                                           powerTotalInput, eMaxStackedInput], 
                                       outputs=[individualPowerOutput, individualBetaOutput])
       powerk, betak = powerBetaModel.predict([covarianceStacked, PowerTotal, eMaxStacked])
       np.save(self.save_path1, powerk)
@@ -132,8 +133,12 @@ for userSize in totalUsers:
   # Train the Model
   # ------------------------------------
   model.load_weights(f'train/{userSize}users/trainedSuper.h5')
-  saveOnEval = SavePowerBeta(f'test/{userSize}users/powerk.npy', f'test/{userSize}users/betak.npy')
-  model.evaluate(x=[covarianceStacked, PowerTotal, identityMatrix, covarianceComplex, eMaxComplex, eMaxStacked], y=covarianceComplex, # Dummy target
+  saveOnEval = SavePowerBeta(f'test/{userSize}users/powerk.npy', 
+                             f'test/{userSize}users/betak.npy')
+  model.evaluate(x=[covarianceStacked, PowerTotal,
+                    identityMatrix, covarianceComplex,
+                    eMaxComplex, eMaxStacked], 
+                 y=covarianceComplex, # Dummy target
                 batch_size=batchSize, verbose=0, 
                 callbacks=saveOnEval
                 )
@@ -175,7 +180,8 @@ for userSize in totalUsers:
     Power = SNR * NoiseVarTotal
     normalizedpk = normalization(pk, Power)
     normalizedbk = normalization(bk, Power)
-    W = computeBeam([normalizedpk, normalizedbk, eMaxComplex, identityMatrix, covarianceComplex])
+    W = computeBeam([normalizedpk, normalizedbk, 
+                     eMaxComplex, identityMatrix, covarianceComplex])
     sumRate = np.mean(computeSumRate(W, covarianceComplex))
     rate.append(sumRate)
     
