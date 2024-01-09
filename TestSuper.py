@@ -110,7 +110,8 @@ for userSize in totalUsers:
   model.compile(optimizer=optimizer, loss=lambda y_true, y_pred: y_pred)
   model.summary()
   
-  keras.utils.plot_model(model, to_file=f'test/{userSize}users/superModel.png', show_shapes=True, show_layer_names=True, dpi=300)
+  keras.utils.plot_model(model, to_file=f'test/{userSize}users/superModel.png',
+                         show_shapes=True, show_layer_names=True, dpi=300)
 
   # ------------------------------------
   # Save optimal beta and Power values
