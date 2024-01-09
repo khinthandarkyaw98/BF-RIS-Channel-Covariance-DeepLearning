@@ -20,18 +20,21 @@ snrFixed = fiexdSNR()
 Nt, N, _, _, _, _, _ = parameters(6) # 6 is just a placeholder
 
 global_ymin = 0
-global_ymax = 100
+global_ymax = 60
 
 
-rateNNSuper30 = np.load(f'Plotting/10users/sumRateSuperNt16N30T10.npy')
-rateZF30 = np.load(f'Plotting/10users/sumRateZFNt16N30T10.npy')
+# load the data
+rateNNSuper6 = np.load(f'Plotting/6users/sumRateSuper.npy')
+#rateZF6 = np.load(f'Plotting/6users/sumRateZF.npy')
+rateWF6 = np.load(f'Plotting/6users/sumRateWF.npy')
 
-rateNNSuper60 = np.load(f'Plotting/10users/sumRateSuperNt16N60T10.npy')
-rateZF60 = np.load(f'Plotting/10users/sumRateZFNt16N60T10.npy')
+rateNNSuper8 = np.load(f'Plotting/8users/sumRateSuper.npy')
+#rateZF8 = np.load(f'Plotting/8users/sumRateZF.npy')
+rateWF8 = np.load(f'Plotting/8users/sumRateWF.npy')
 
-rateNNSuper120 = np.load(f'Plotting/10users/sumRateSuperNt16N120T10.npy')
-rateZF120 = np.load(f'Plotting/10users/sumRateZFNt16N120T10.npy')
-
+rateNNSuper10 = np.load(f'Plotting/10users/sumRateSuper.npy')
+#rateZF10 = np.load(f'Plotting/10users/sumRateZF.npy')
+rateWF10 = np.load(f'Plotting/10users/sumRateWF.npy')
 
 print('Loading...')
 linePrint()
@@ -40,14 +43,17 @@ plt.figure(figsize=(7, 6))
 
 
 # Plot lines
-plottingLine(rateZF30, 'ZF-SBF [N = 30]', 'dashed', 'red', '+')
-plottingLine(rateNNSuper30, 'Proposed [N = 30]', 'solid', 'red', 'o')
+#plottingLine(rateZF6, 'ZF-SBF [M+K=6]', 'dotted', 'red', '+')
+plottingLine(rateNNSuper6, 'Proposed [M+K=6]', 'solid', 'red', 'o')
+plottingLine(rateWF6, 'ZF beam w/ WF pwr [M+K=6]', 'dashed', 'red', 'x')
 
-plottingLine(rateZF60, 'ZF-SBF [N = 60]', 'dashed', 'green', '+')
-plottingLine(rateNNSuper60, 'Proposed [N = 60]', 'solid', 'green', 'o')
+#plottingLine(rateZF8, 'ZF-SBF [M+K=8]', 'dotted', 'green', '+')
+plottingLine(rateNNSuper8, 'Proposed [M+K=8]', 'solid', 'green', 'o')
+plottingLine(rateWF8, 'ZF beam w/ WF pwr [M+K=8]', 'dashed', 'green', 'x')
 
-plottingLine(rateZF120, 'ZF-SBF [N = 120]', 'dashed', 'blue', '+')
-plottingLine(rateNNSuper120, 'Proposed [N = 120]', 'solid', 'blue', 'o')
+#plottingLine(rateZF10, 'ZF-SBF [M+K=10]', 'dotted', 'blue', '+')
+plottingLine(rateNNSuper10, 'Proposed [M+K=10]', 'solid', 'blue', 'o')
+plottingLine(rateWF10, 'ZF beam w/ WF pwr [M+K=10]', 'dashed', 'blue', 'x')
 
 # Legend
 plt.legend(loc='upper left', ncol=1, fontsize=13)
@@ -55,16 +61,16 @@ plt.ylim([global_ymin, global_ymax])
 
 # Axes labels
 plt.rc('text', usetex=True)
-plt.xlabel(r'$P_{\mathrm{tot}}/\sigma_n^2$ (dB)', fontsize=12)
-plt.ylabel('Sum rate (bps/Hz)', fontsize=13)
+plt.xlabel(r'$P_{\mathrm{T}}/\sigma_n^2$ (dB)', fontsize=12)
+plt.ylabel('Approximate sum rate (bps/Hz)', fontsize=13)
 
 # Title
-totalUser = 10
-plt.title(r'$N_t$ = {}, $M + K$ = {}'.format(Nt, totalUser), fontsize=13)
+plt.title(r'$N_t$ = {}, N = {}'.format(Nt, N), fontsize=13)
 
 plt.grid(True) 
 plt.tight_layout()  # Adjust layout to prevent clipping of legend
-plt.savefig(f'Plotting/sumRateComparison.png')  
+plt.savefig(f'Plotting/fig3.tiff')  
+plt.savefig(f'Plotting/fig3.png')  
 plt.close()
 
 print("Done!")

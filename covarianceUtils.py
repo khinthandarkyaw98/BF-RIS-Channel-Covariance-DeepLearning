@@ -40,6 +40,11 @@ class Covariance:
       A_m_Hermitian = np.conjugate(A_m).T
       R_m = (self.Nt/self.Lm[m]) * np.matmul(A_m, A_m_Hermitian)
       channel_covariance.append(R_m)
+      # if m == 0:
+      #   print(f'Rank of direct channel_covariance: {np.linalg.matrix_rank(R_m)}')
+      #   print(f'\nNorm of direct channel_covariance: {np.linalg.norm(R_m, ord=2)}')
+      #   _, _, _, max_eigenvalue = self.eigVecCorrMaxEigVal(R_m)
+      #   print(f'Max eigenvalue of direct channel_covariance: {max_eigenvalue}\n')
     return channel_covariance
 
   ##############################################################
@@ -65,12 +70,14 @@ class Covariance:
           G_k[nt, n] = np.exp(1j * np.pi * nt * np.sin(xi_k[n]) * np.sin(upsilon_k[n])) * \
           np.exp(-1j * np.pi * n * np.sin(xi_k[n]) * np.sin(upsilon_k[n])) 
       channelBsIrs.append(G_k)
+      # if k == 0:
+      #   print(f'Norm of G_k: {np.linalg.norm(G_k, ord=2)}')
     return channelBsIrs
    
   def generate_big_theta(self)-> list:
     big_theta = []
     for _ in range(self.K):
-      rand_deg = np.exp(1j * np.random.uniform(0, 2 * np.pi, self.N))
+      rand_deg = (1/np.sqrt(self.N)) * np.exp(1j * np.random.uniform(0, 2 * np.pi, self.N))
       diag_matrix = np.diag(rand_deg)
       big_theta.append(diag_matrix)  
     return big_theta  
@@ -92,6 +99,11 @@ class Covariance:
       B_k_Hermitian = np.conjugate(B_k).T
       R_g = (self.N/self.Lk[k]) * np.matmul(B_k, B_k_Hermitian)
       channel_covariance_irs.append(R_g)
+      # if k == 0:
+      #   print(f'Rank of R_g: {np.linalg.matrix_rank(R_g)}')
+      #   print(f'Norm of R_g: {np.linalg.norm(R_g, ord=2)}')
+      #   _, _, _, max_eigenvalue = self.eigVecCorrMaxEigVal(R_g)
+      #   print(f'Max eigenvalue of R_g: {max_eigenvalue}\n')
     return channel_covariance_irs
   
   def generate_composite_channel_covariance(self, channelBSIRS: list, big_theta: list, channel_covariance_irs: list, channel_covaraince: list)-> list:
@@ -106,6 +118,11 @@ class Covariance:
       mul_3 = np.matmul(big_theta_k_Hermitian, G_k_Hermitian)
       R_h_k = np.matmul(mul_2, mul_3)
       channel_covaraince.append(R_h_k) # included direct channel covariance
+      # if k == 0:
+      #   print(f'Rank of composite channel_covariance: {np.linalg.matrix_rank(R_h_k)}')
+      #   print(f'Norm of composite channel_covariance: {np.linalg.norm(R_h_k, ord=2)}')
+      #   _, _, _, max_eigenvalue = self.eigVecCorrMaxEigVal(R_h_k)
+      #   print(f'Max eigenvalue of composite channel_covariance: {max_eigenvalue}\n')
     return channel_covaraince
   
   ##############################################################
@@ -123,13 +140,14 @@ class Covariance:
     sorted_eigenvectors = eigenvectors[:, sorted_indices]
     # select the largest eigenvector ( leftmost column )
     ekMax = sorted_eigenvectors[:, 0].reshape(-1, 1)
-    return ekMax, sorted_eigenvalues, sorted_eigenvectors
+    max_eigenvalue = sorted_eigenvalues[0]
+    return ekMax, sorted_eigenvalues, sorted_eigenvectors, max_eigenvalue
   
   def eMax(self, channel_covariance: list):
     eMax = []
     for m in range(self.totalUsers):
       R_m = channel_covariance[m]
-      e_m_max, _, _ = self.eigVecCorrMaxEigVal(R_m)
+      e_m_max, _, _, _ = self.eigVecCorrMaxEigVal(R_m)
       eMax.append(e_m_max)
     return eMax
   
@@ -139,7 +157,7 @@ class Covariance:
     Lambda = []
     for m in range(self.totalUsers):
       R_m = channel_covariance[m]
-      _, sorted_eigenvalues, sorted_eigenvectors = self.eigVecCorrMaxEigVal(R_m)
+      _, sorted_eigenvalues, sorted_eigenvectors, _ = self.eigVecCorrMaxEigVal(R_m)
       U_m = sorted_eigenvectors
       U_m_Hermitian = np.conjugate(sorted_eigenvectors).T
       U.append(U_m)
@@ -185,7 +203,7 @@ class Covariance:
     for m in range(self.totalUsers):
       E_m_0_h = np.conjugate(E_0[m]).T
       resulted_matrix = E_m_0_h @ channel_covariance[m] @ E_0[m]
-      V_m_max, _, _ = self.eigVecCorrMaxEigVal(resulted_matrix)
+      V_m_max, _, _, _ = self.eigVecCorrMaxEigVal(resulted_matrix)
       V_max.append(V_m_max)
     return V_max
   

@@ -9,7 +9,7 @@ The architecture of the proposed neural network model is shown in [systemModel](
 For more details, please view the paper [Insert URL]().
 
 ### Results
-Figures of the sum rates in the paper are found in the folder [sumRates](./sumRates/). Please look at folder [lossCurves](./lossCurves/Fig3/) to know the loss rates of `Fig. 3` in the paper. The hyperparameters follow all figures presented in the paper. 
+Figures of the sum rates in the paper are found in the folder [sumRates](./sumRates/).  The hyperparameters follow all figures presented in the paper. 
 
 Please modify `N` in [NNUtils.py](./NNUtils.py) and respective `python` `plot` files to reproduce all figures in the paper.
 
@@ -26,7 +26,7 @@ keras==2.15.0
 **1.Installing**
 * Clone this Repository:
     ```bash 
-    git clone https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning
+    git clone https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning.git
     cd BF-RIS-Channel-Covariance-DeepLearning
     ```
 * Install Python requriements:

@@ -19,14 +19,14 @@ def fiexdSNR():
   return snr
 
 def totalUsersFunc():
-  #totalUsers = [6, 8, 10]  # figure 2
-  totalUsers = [10] # figure 3
+  #totalUsers = [6, 8, 10]  # figure 2 and figure 3
+  totalUsers = [8] # figure 4
   return totalUsers
 
 def parameters(totalUser):
   Nt = 16 # Nt = antenna_size
-  N = 30 # N = No. of patches on each IRS # figure 2, figure 3
-  #N = 60 # N = No. of patches on each IRS # figure 3
+  #N = 30 # N = No. of patches on each IRS # figure 2, figure 3
+  N = 60 # N = No. of patches on each IRS # figure 4
   #N = 120 # N = No. of patches on each IRS # figure 3
   #start = totalUser - 3
   #M =  random.randint(start, totalUser - 1)
@@ -34,8 +34,8 @@ def parameters(totalUser):
   M =  random.randint(0, end) # M = direct user_size
   K = totalUser - M # K = IRS-assisted user_size
   while True:
-    Lm = np.random.randint(1, 2, size=M) # Lm = path between BS and user
-    Lk = np.random.randint(1, 2, size=K) # Lk = path between IRS and user
+    Lm = np.random.randint(2, 3, size=M) # Lm = path between BS and user
+    Lk = np.random.randint(2, 3, size=K) # Lk = path between IRS and user
     Ltotal = np.random.randint(1, 2, size=totalUser) # Ltotal = path between BS/IRS and user
     if np.sum(Lm) + np.sum(Lk) <= Nt:
       break
