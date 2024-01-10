@@ -11,7 +11,7 @@ For more details, please view the paper [Insert URL]().
 ### Results
 Figures of the sum rates in the paper are found in the folder [sumRates](./sumRates/).  The hyperparameters follow all figures presented in the paper. 
 
-Please modify `N` in [NNUtils.py](./NNUtils.py) and respective `python` `plot` files to reproduce all figures in the paper.
+Please modify `N`, `Nt`, `totalUsers`, `Lm`, `Lk` in [NNUtils.py](./NNUtils.py) and respective `python` `plot` files to reproduce all figures in the paper.
 
 
 ### Run
