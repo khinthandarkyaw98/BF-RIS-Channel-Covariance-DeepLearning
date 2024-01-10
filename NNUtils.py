@@ -24,7 +24,8 @@ def totalUsersFunc():
   return totalUsers
 
 def parameters(totalUser):
-  Nt = 16 # Nt = antenna_size
+  #Nt = 10 # Nt = antenna_size
+  Nt = 16
   #N = 30 # N = No. of patches on each IRS # figure 2, figure 3
   N = 60 # N = No. of patches on each IRS # figure 4
   #N = 120 # N = No. of patches on each IRS # figure 3
@@ -34,8 +35,10 @@ def parameters(totalUser):
   M =  random.randint(0, end) # M = direct user_size
   K = totalUser - M # K = IRS-assisted user_size
   while True:
-    Lm = np.random.randint(2, 3, size=M) # Lm = path between BS and user
-    Lk = np.random.randint(2, 3, size=K) # Lk = path between IRS and user
+    #Lm = np.random.randint(2, 3, size=M)
+    Lm = np.random.randint(1, 2, size=M) # Lm = path between BS and user
+    #Lk = np.random.randint(2, 3, size=K)
+    Lk = np.random.randint(1, 2, size=K) # Lk = path between IRS and user
     Ltotal = np.random.randint(1, 2, size=totalUser) # Ltotal = path between BS/IRS and user
     if np.sum(Lm) + np.sum(Lk) <= Nt:
       break

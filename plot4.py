@@ -10,7 +10,6 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 from NNUtils import *
 
-
 # tf_version: 2.15.0
 print(tf.__version__)
 print("Loading...")
@@ -35,15 +34,17 @@ rateWFcase2 = np.load(f'Plotting/{totalUsers}users/sumRateWFcase2.npy')
 print('Loading...')
 linePrint()
 
-plt.figure(figsize=(7, 6))  
+plt.rcParams['text.usetex'] = True
+plt.rcParams['text.latex.preamble'] = r'\usepackage{amsmath}'
+plt.figure(figsize=(7, 6))
 
 
 # Plot lines
 #plottingLine(rateZF60, 'ZF-SBF [N = 60]', 'dotted', 'green', '+')
-plottingLine(rateWFcase1, 'ZF beam w/ WF pwr [rank = 1]', 'dashed', 'blue', '+')
-plottingLine(rateWFcase2, 'ZF beam w/ WF pwr [rank = 2]', 'dashed', 'red', '+')
-plottingLine(rateNNSupercase1, 'Proposed [rank = 1]', 'solid', 'blue', '|')
-plottingLine(rateNNSupercase2, 'Proposed [rank = 2]', 'solid', 'red', '|')
+plottingLine(rateWFcase1, r'ZF beam w/ WF pwr [Rank ($R_h$) = 1 for all UEs]', 'dashed', 'blue', '+')
+plottingLine(rateWFcase2, r'ZF beam w/ WF pwr [Rank ($R_h$) = 2 for all UEs]', 'dashed', 'red', '+')
+plottingLine(rateNNSupercase1, r'Proposed [Rank ($R_h$) = 1 for all UEs]', 'solid', 'blue', '|')
+plottingLine(rateNNSupercase2, r'Proposed [Rank ($R_h$) = 2 for all UEs]', 'solid', 'red', '|')
 
 # Legend
 plt.legend(loc='upper left', ncol=1, fontsize=13)
@@ -59,8 +60,9 @@ plt.title(r'$N_t$ = {}, $N$ = {}, $M + K$ = {}'.format(Nt, N, totalUsers), fonts
 
 plt.grid(True) 
 plt.tight_layout()  # Adjust layout to prevent clipping of legend
-plt.savefig(f'Plotting/fig4.tiff')  
+#plt.savefig(f'Plotting/fig4.tiff')  
 plt.savefig(f'Plotting/fig4.png')  
+#plt.savefig('Plotting/fig4.eps', format='eps')
 plt.close()
 
 print("Done!")

@@ -39,7 +39,9 @@ rateWF10 = np.load(f'Plotting/10users/sumRateWF.npy')
 print('Loading...')
 linePrint()
 
-plt.figure(figsize=(7, 6))  
+plt.rcParams['text.usetex'] = True
+plt.rcParams['text.latex.preamble'] = r'\usepackage{amsmath}'
+plt.figure(figsize=(7, 6))
 
 
 # Plot lines
@@ -69,8 +71,9 @@ plt.title(r'$N_t$ = {}, N = {}'.format(Nt, N), fontsize=13)
 
 plt.grid(True) 
 plt.tight_layout()  # Adjust layout to prevent clipping of legend
-plt.savefig(f'Plotting/fig3.tiff')  
-plt.savefig(f'Plotting/fig3.png')  
+#plt.savefig(f'Plotting/fig3.tiff')  
+#plt.savefig(f'Plotting/fig3.png')  
+plt.savefig('Plotting/fig3.eps', format='eps') 
 plt.close()
 
 print("Done!")
