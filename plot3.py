@@ -72,8 +72,8 @@ plt.title(r'$N_t$ = {}, N = {}'.format(Nt, N), fontsize=13)
 plt.grid(True) 
 plt.tight_layout()  # Adjust layout to prevent clipping of legend
 #plt.savefig(f'Plotting/fig3.tiff')  
-#plt.savefig(f'Plotting/fig3.png')  
-plt.savefig('Plotting/fig3.eps', format='eps') 
+plt.savefig(f'Plotting/fig3.png')  
+#plt.savefig('Plotting/fig3.eps', format='eps') 
 plt.close()
 
 print("Done!")

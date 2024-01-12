@@ -57,7 +57,7 @@ keras==2.15.0
 
 * Check the elapsed time:
   ```bash 
-    python timerCalculation.py
+  python timerCalculation.py
   ```
   
 * Plotting the graph:
