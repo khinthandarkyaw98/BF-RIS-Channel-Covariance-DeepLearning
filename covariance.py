@@ -2,13 +2,14 @@
 Generate covariance 
 Author    : Khin Thandar Kyaw
 Date      : 31 AUG 2023
-Last Modified  : 25 Nov 2023
+Last Modified  : 12 JAN 2024
 """
 
+import time
 from NNUtils import *
 from covarianceUtils import *
-
-
+from timer import *
+  
 ########################################################################
 print('Generating covariance matrix...')
 print('Loading...')
@@ -22,6 +23,8 @@ for totalUser in totalUsers:
   beamSample = []
   absZFBFSample = []
   sampleSize = 50000
+  trainSize = int(0.85 * sampleSize)
+  timeList = []
   print(f'Total # of Users: {totalUser}')
   linePrint()
   for sample in range(sampleSize):
@@ -62,17 +65,21 @@ for totalUser in totalUsers:
     eMaxSample.append(eMax)
     
     # save for zero-forcing
-    U = covarianceClass.eigen_decomposition_channel_covariance(channel_covariance_all)
-    U_star = covarianceClass.extract_U_star(U)
-    U_tilde, size_U_tilde_col = covarianceClass.construct_U_tilde(U_star)
-    E_0 = covarianceClass.SVD_U_tilde(U_tilde, size_U_tilde_col)
-    V_max = covarianceClass.project_channel_covariance_onto_E_0(E_0, channel_covariance_all)
-    W = covarianceClass.calculate_beamforming_vector(E_0, V_max)
-    abs_ZFBF_res = covarianceClass.check_ZFBF_condition(U_tilde, W)
-    
-    beamSample.append(W)
-    absZFBFSample.append(abs_ZFBF_res)
+    # ------------------------------------
+    # Count the time for ZFBF
+    # ------------------------------------
+    if sample >= trainSize:
+      with Timer() as timer:
+        U_tilde, W = performCalculations(covarianceClass, channel_covariance_all)
+        beamSample.append(W)
+      timeList.append(timer.elapsed_time)
+    # ------------------------------------
+    else: 
+      U_tilde, W = performCalculations(covarianceClass, channel_covariance_all)
+      beamSample.append(W)
       
+    abs_ZFBF_res = covarianceClass.check_ZFBF_condition(U_tilde, W)
+    absZFBFSample.append(abs_ZFBF_res)
       
   covarianceSample= np.array(covarianceSample)
   print(f'channel_covariance.shape: {covarianceSample.shape}')
@@ -95,25 +102,25 @@ for totalUser in totalUsers:
   # shuffle the idx
   np.random.shuffle(idx)
 
-  train_size = int(0.85 * covarianceSample.shape[0])
+  #trainSize = int( covarianceSample.shape[0])
 
   # save channel covariance
 
-  cov_train = covarianceSample[idx[:train_size]]
-  cov_test = covarianceSample[idx[train_size:]]
+  cov_train = covarianceSample[idx[:trainSize]]
+  cov_test = covarianceSample[idx[trainSize:]]
 
   print(f'cov_train.shape: {cov_train.shape}')
   print(f'cov_test.shape: {cov_test.shape}')
 
   # save eigenVectors corresponding to the largest eigenvalues
-  eMax_train = eMaxSample[idx[:train_size]]
-  eMax_test = eMaxSample[idx[train_size:]]
+  eMax_train = eMaxSample[idx[:trainSize]]
+  eMax_test = eMaxSample[idx[trainSize:]]
 
   print(f'eMax_train.shape: {eMax_train.shape}')
   print(f'eMax_test.shape: {eMax_test.shape}')
 
   # save beamforming vector
-  beam_test = beamSample[idx[train_size:]]
+  beam_test = beamSample[idx[trainSize:]]
 
   print(f'beam_test.shape: {beam_test.shape}')
 
@@ -128,6 +135,7 @@ for totalUser in totalUsers:
   np.save(f'train/{totalUser}users/eMax_train.npy', eMax_train)
   np.save(f'test/{totalUser}users/eMax_test.npy', eMax_test)
   np.save(f'test/{totalUser}users/beamZF.npy', beam_test) # ZF beamforming
+  np.save(f'test/{totalUser}users/timeArrayZWF.npy', timeList) # W Time
   np.save(f'train/{totalUser}users/absZFBFSample.npy', absZFBFSample) # ZF condition
   print(f'Data saved successfully!')
   linePrint()
@@ -135,25 +143,25 @@ for totalUser in totalUsers:
   # ------------------------------------
   # Calculate the sum rate of Zero-Forcing
   # ------------------------------------
-  print("Calculating the sum rate of Zero-Forcing...")
-  print("Loading...")
+  # print("Calculating the sum rate of Zero-Forcing...")
+  # print("Loading...")
   
-  rateZ = []
-  _, _, _, _, NoiseVarTotal, _  = dataPreparation(cov_test)
-  for snr in range(-5, 25, 5):
-    SNR = np.power(10, np.ones([cov_test.shape[0], 1]) * snr / 10)
-    Power = SNR * NoiseVarTotal
+  # rateZ = []
+  # _, _, _, _, NoiseVarTotal, _  = dataPreparation(cov_test)
+  # for snr in range(-5, 25, 5):
+  #   SNR = np.power(10, np.ones([cov_test.shape[0], 1]) * snr / 10)
+  #   Power = SNR * NoiseVarTotal
     
-    # sum rate formulat for wZF is different in noise part
-    # K / P_total
-    scaledFactor = np.squeeze(np.sqrt(Power/ totalUser))
-    sumRateZ = np.mean(computeSumRate(beam_test, cov_test, scaledFactor))
-    rateZ.append(sumRateZ)
+  #   # sum rate formulat for wZF is different in noise part
+  #   # K / P_total
+  #   scaledFactor = np.squeeze(np.sqrt(Power/ totalUser))
+  #   sumRateZ = np.mean(computeSumRate(beam_test, cov_test, scaledFactor))
+  #   rateZ.append(sumRateZ)
     
-  ensure_dir(f'Plotting/{totalUser}users/')
-  np.save(f'Plotting/{totalUser}users/sumRateZF.npy', np.array(rateZ))
-  print(f'Saved sumRateZ successfully for {totalUser} users!')
-  linePrint()
+  # ensure_dir(f'Plotting/{totalUser}users/')
+  # np.save(f'Plotting/{totalUser}users/sumRateZF.npy', np.array(rateZ))
+  #print(f'Saved sumRateZ successfully for {totalUser} users!')
+  #linePrint()
   
 
     

@@ -40,6 +40,11 @@ keras==2.15.0
   python covariance.py
   ```
 
+* Calculate the sum rate of ZF beams w/ water-filling pwr:
+  ```bash 
+  python waterFilling.py
+  ```
+
 * Train the model: 
   ```bash
   python TrainSuper.py
@@ -49,13 +54,18 @@ keras==2.15.0
   ```bash
   python TestSuper.py
   ```
+
+* Check the elapsed time:
+  ```bash 
+    python timerCalculation.py
+  ```
   
 * Plotting the graph:
   ```bash
   python plot.py
   ```
   
-Loss curves and sum rate plots can also be viewed in `train` and  `Plotting` folders which will be automatically created after running the abovementioned files.
+Eplased time info, Loss curves and sum rate plots can also be viewed in `timer`, `train` and  `Plotting` folders which will be automatically created after running the abovementioned files.
 
 ### Using the code
 Please cite this repository if you utilize our code:
