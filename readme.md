@@ -11,21 +11,17 @@ The architecture of the proposed neural network model is shown as follows.
   <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png" style="width:550px; height:380px">
 </div>
 
-### Results
-Figures of the sum rates in the paper are found in the folder [sumRates](./sumRates/) or as belows.  The hyperparameters follow all figures presented in the paper. 
+### Numerical Results
+Figures of the sum rates and computaion time in the paper are found in the folder [sumRates](./sumRates/) and [elapsedTime](./elapsedTime/Bar_time.png) respectively or as belows.  The hyperparameters follow all figures presented in the paper. 
 
 <div align="center">
-  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig2.png" style="width:250px; height:200px">
-  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig3.png" style="width:250px; height:200px">
-  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig4.png" style="width:250px; height:200px">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig2.png" style="width:400px; height:350px">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig3.png" style="width:400px; height:350px">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig4.png" style="width:400px; height:350px">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/elapsedTime/Bar_time.png" style="width:400px; height:350px">
 </div>
 
 Please modify `N`, `Nt`, `totalUsers`, `Lm`, `Lk` in [NNUtils.py](./NNUtils.py) and respective `python` `plot` files to reproduce all figures in the paper.
-
-### Computation Time
-<div align="center">
-  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/elapsedTime/Bar_time.png" style="width:550px; height:450px">
-</div>
 
 ### Run
 **0.Requirements**
