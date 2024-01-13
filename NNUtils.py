@@ -26,8 +26,8 @@ def totalUsersFunc():
 def parameters(totalUser):
   #Nt = 10 # Nt = antenna_size
   Nt = 16
-  N = 30 # N = No. of patches on each IRS # figure 2, figure 3
-  #N = 60 # N = No. of patches on each IRS # figure 4
+  #N = 30 # N = No. of patches on each IRS # figure 2, figure 3
+  N = 60 # N = No. of patches on each IRS # figure 4
   #N = 120 # N = No. of patches on each IRS # figure 3
   #start = totalUser - 3
   #M =  random.randint(start, totalUser - 1)
