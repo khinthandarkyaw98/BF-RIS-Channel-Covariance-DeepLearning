@@ -22,6 +22,15 @@ Figures of the sum rates in the paper are found in the folder [sumRates](./sumRa
 
 Please modify `N`, `Nt`, `totalUsers`, `Lm`, `Lk` in [NNUtils.py](./NNUtils.py) and respective `python` `plot` files to reproduce all figures in the paper.
 
+### Computation Time
+<div align="center">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/elapsedTime/Bar_time.tiff" style="width:550px; height:380px">
+</div>
+
+<div align="center">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/elapsedTime/Bar_time.eps" style="width:550px; height:380px">
+</div>
+
 
 ### Run
 **0.Requirements**
