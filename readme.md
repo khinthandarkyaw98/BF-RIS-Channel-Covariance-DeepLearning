@@ -9,7 +9,8 @@ The architecture of the proposed neural network model is shown as follows.
   <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png" style="width:550px; height:380px">
 </div>
 
-For more details, please view the paper [Insert URL]().
+> [!IMPORTANT]
+> For more details, please view the paper [Insert URL]().
 
 ### Results
 Figures of the sum rates in the paper are found in the folder [sumRates](./sumRates/) or as belows.  The hyperparameters follow all figures presented in the paper. 
