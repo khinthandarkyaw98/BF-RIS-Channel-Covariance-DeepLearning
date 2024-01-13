@@ -6,7 +6,7 @@ See the folder [sytemModel](./systemModel/fig1.png) to understand the custom Dow
 
 The architecture of the proposed neural network model is shown as follows.
 > [!IMPORTANT]
-> For more details, please view the paper [Insert URL]().
+> For details, please view the paper [Insert URL]().
 <div align="center">
   <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png">
 </div>
