@@ -74,13 +74,13 @@ Please cite this repository if you utilize our code:
 
 ### System Model
 <div align="center">
-  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png" style="width:500px; height:350px">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png" style="width:550px; height:380px">
 </div>
 
 ### Numerical Results
 <div align="center">
-  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig2.png" style="width:230px; height:200px">
-  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig3.png" style="width:230px; height:200px">
-  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig4.png" style="width:230px; height:200px">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig2.png" style="width:250px; height:200px">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig3.png" style="width:250px; height:200px">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig4.png" style="width:250px; height:200px">
 </div>
 
