@@ -5,12 +5,11 @@
 See the folder [sytemModel](./systemModel/fig1.png) to understand the custom Downlink Beamforming with Reconfigurable Intelligent Surface environment.
 
 The architecture of the proposed neural network model is shown as follows.
+> [!IMPORTANT]
+> For more details, please view the paper [Insert URL]().
 <div align="center">
   <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png" style="width:550px; height:380px">
 </div>
-
-> [!IMPORTANT]
-> For more details, please view the paper [Insert URL]().
 
 ### Results
 Figures of the sum rates in the paper are found in the folder [sumRates](./sumRates/) or as belows.  The hyperparameters follow all figures presented in the paper. 
