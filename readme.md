@@ -4,7 +4,7 @@
 
 See the folder [sytemModel](./systemModel/fig1.png) to understand the custom Downlink Beamforming with Reconfigurable Intelligent Surface environment.
 
-The architecture of the proposed neural network model is shown in [systemModel](/systemModel/modelArchitecture.png) or as below.
+The architecture of the proposed neural network model is shown as follows.
 <div align="center">
   <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png" style="width:550px; height:380px">
 </div>
