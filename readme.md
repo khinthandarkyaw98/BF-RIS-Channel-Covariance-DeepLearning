@@ -24,13 +24,8 @@ Please modify `N`, `Nt`, `totalUsers`, `Lm`, `Lk` in [NNUtils.py](./NNUtils.py) 
 
 ### Computation Time
 <div align="center">
-  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/elapsedTime/Bar_time.tiff" style="width:550px; height:380px">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/elapsedTime/Bar_time.png" style="width:550px; height:480px">
 </div>
-
-<div align="center">
-  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/elapsedTime/Bar_time.eps" style="width:550px; height:380px">
-</div>
-
 
 ### Run
 **0.Requirements**
