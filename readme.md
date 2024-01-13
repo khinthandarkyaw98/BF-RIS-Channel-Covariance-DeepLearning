@@ -1,4 +1,4 @@
-# Optimization of Downlink Beamforming with Reconfigurable Intelligent Surface using Channel Covariances
+# Optimization of Transmit Beamforming With Channel Covariances for MISO Downlink Assisted by Reconfigurable Intelligent Surfaces
 
 ### System Model
 
