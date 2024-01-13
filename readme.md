@@ -74,7 +74,7 @@ Please cite this repository if you utilize our code:
 
 ### System Model
 <div align="center">
-  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png" style="width:300px; height:250px">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png" style="width:400px; height:350px">
 </div>
 
 ### Numerical Results
