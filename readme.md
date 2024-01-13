@@ -71,7 +71,7 @@ keras==2.15.0
   
 * Plotting the graph:
   ```bash
-  python plot.py
+  python plot_corresponding_number_.py
   ```
   
 Eplased time info, Loss curves and sum rate plots can also be viewed in `timer`, `train` and  `Plotting` folders which will be automatically created after running the abovementioned files.
