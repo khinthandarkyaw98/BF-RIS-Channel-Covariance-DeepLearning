@@ -4,12 +4,12 @@
 
 See the folder [sytemModel](./systemModel/fig1.png) to understand the custom Downlink Beamforming with Reconfigurable Intelligent Surface environment.
 
-The architecture of the proposed neural network model is shown in [systemModel](/systemModel/modelArchitecture.png).
+The architecture of the proposed neural network model is shown in [systemModel](/systemModel/modelArchitecture.png) or as belows.
 
 For more details, please view the paper [Insert URL]().
 
 ### Results
-Figures of the sum rates in the paper are found in the folder [sumRates](./sumRates/).  The hyperparameters follow all figures presented in the paper. 
+Figures of the sum rates in the paper are found in the folder [sumRates](./sumRates/) or as belows.  The hyperparameters follow all figures presented in the paper. 
 
 Please modify `N`, `Nt`, `totalUsers`, `Lm`, `Lk` in [NNUtils.py](./NNUtils.py) and respective `python` `plot` files to reproduce all figures in the paper.
 
@@ -71,4 +71,22 @@ Eplased time info, Loss curves and sum rate plots can also be viewed in `timer`,
 Please cite this repository if you utilize our code:
 ```
 ```
+
+### System Model
+<div align="center">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png">
+</div>
+
+### Numerical Results
+<div align="center">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig2.png">
+</div>
+
+<div align="center">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig3.png">
+</div>
+
+<div align="center">
+  <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/sumRates/fig4.png">
+</div>
 
