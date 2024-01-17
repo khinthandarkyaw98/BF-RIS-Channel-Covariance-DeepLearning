@@ -46,7 +46,7 @@ for userSize in totalUsers:
     identityMatrix = tf.tile(identityMatrix, [1, userSize, 1, 1])
 
     # ------------------------------------
-    # Construct the Supervised Model
+    # Construct the Unsupervised Model
     # ------------------------------------
 
     # (userSize, real/imag, anteannaSize, antennaSize)

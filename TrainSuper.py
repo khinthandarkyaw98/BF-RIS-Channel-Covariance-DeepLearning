@@ -45,7 +45,7 @@ for userSize in totalUsers:
 
 
   # ------------------------------------
-  # Construct the Supervised Model
+  # Construct the Unsupervised Model
   # ------------------------------------
 
   # (userSize, real/imag, anteannaSize, antennaSize)
