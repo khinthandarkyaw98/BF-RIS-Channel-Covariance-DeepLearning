@@ -46,34 +46,34 @@ plt.figure(figsize=(7, 6))
 
 # Plot lines
 #plottingLine(rateZF6, 'ZF-SBF [M+K=6]', 'dotted', 'red', '+')
-plottingLine(rateNNSuper6, 'Proposed [M+K=6]', 'solid', 'red', 'o')
-plottingLine(rateWF6, 'ZF beam w/ WF pwr [M+K=6]', 'dashed', 'red', 'x')
+plottingLine(rateNNSuper6, 'Proposed [M+K=6]', 'solid', 'red', 'P')
+plottingLine(rateWF6, 'ZF beam w/ WF pwr [M+K=6]', 'dashed', 'red', 'P')
 
 #plottingLine(rateZF8, 'ZF-SBF [M+K=8]', 'dotted', 'green', '+')
-plottingLine(rateNNSuper8, 'Proposed [M+K=8]', 'solid', 'green', 'o')
-plottingLine(rateWF8, 'ZF beam w/ WF pwr [M+K=8]', 'dashed', 'green', 'x')
+plottingLine(rateNNSuper8, 'Proposed [M+K=8]', 'solid', 'green', 'v')
+plottingLine(rateWF8, 'ZF beam w/ WF pwr [M+K=8]', 'dashed', 'green', 'v')
 
 #plottingLine(rateZF10, 'ZF-SBF [M+K=10]', 'dotted', 'blue', '+')
-plottingLine(rateNNSuper10, 'Proposed [M+K=10]', 'solid', 'blue', 'o')
-plottingLine(rateWF10, 'ZF beam w/ WF pwr [M+K=10]', 'dashed', 'blue', 'x')
+plottingLine(rateNNSuper10, 'Proposed [M+K=10]', 'solid', 'blue', 'd')
+plottingLine(rateWF10, 'ZF beam w/ WF pwr [M+K=10]', 'dashed', 'blue', 'd')
 
 # Legend
-plt.legend(loc='upper left', ncol=1, fontsize=13)
+plt.legend(loc='upper left', ncol=1, fontsize=16)
 plt.ylim([global_ymin, global_ymax])
 
 # Axes labels
 plt.rc('text', usetex=True)
-plt.xlabel(r'$P_{\mathrm{T}}/\sigma_n^2$ (dB)', fontsize=12)
-plt.ylabel('Approximate sum rate (bps/Hz)', fontsize=13)
+plt.xlabel(r'$P_{\mathrm{T}}/\sigma_n^2$ (dB)', fontsize=16)
+plt.ylabel('Approximate sum rate (bps/Hz)', fontsize=16)
 
 # Title
-plt.title(r'$N_t$ = {}, N = {}'.format(Nt, N), fontsize=13)
+plt.title(r'$N_t$ = {}, N = {}'.format(Nt, N), fontsize=16)
 
 plt.grid(True) 
 plt.tight_layout()  # Adjust layout to prevent clipping of legend
 #plt.savefig(f'Plotting/fig3.tiff')  
 plt.savefig(f'Plotting/fig3.png')  
-#plt.savefig('Plotting/fig3.eps', format='eps') 
+plt.savefig('Plotting/fig3.eps', format='eps') 
 plt.close()
 
 print("Done!")

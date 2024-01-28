@@ -160,7 +160,7 @@ def lossCurve(history, userSize, type, snrFixed):
   plt.grid()
   
 def plottingLine(Data, Label, LineStyle, Color, Marker):
-  plt.plot(range(-5, 25, 5), Data, label=Label, linestyle=LineStyle, color=Color, marker=Marker)
+  plt.plot(range(-5, 25, 5), Data, label=Label, linestyle=LineStyle, color=Color, marker=Marker, markersize=8)
   
 
 

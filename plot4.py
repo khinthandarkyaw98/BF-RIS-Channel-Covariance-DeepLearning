@@ -41,28 +41,28 @@ plt.figure(figsize=(7, 6))
 
 # Plot lines
 #plottingLine(rateZF60, 'ZF-SBF [N = 60]', 'dotted', 'green', '+')
-plottingLine(rateWFcase1, r'ZF beam w/ WF pwr [Rank ($R_h$) = 1 for all UEs]', 'dashed', 'blue', '+')
-plottingLine(rateWFcase2, r'ZF beam w/ WF pwr [Rank ($R_h$) = 2 for all UEs]', 'dashed', 'red', '+')
-plottingLine(rateNNSupercase1, r'Proposed [Rank ($R_h$) = 1 for all UEs]', 'solid', 'blue', '|')
-plottingLine(rateNNSupercase2, r'Proposed [Rank ($R_h$) = 2 for all UEs]', 'solid', 'red', '|')
+plottingLine(rateWFcase1, r'ZF beam w/ WF pwr [Rank ($R_h$) = 1 for all UEs]', 'dashed', 'blue', 'v')
+plottingLine(rateWFcase2, r'ZF beam w/ WF pwr [Rank ($R_h$) = 2 for all UEs]', 'dashed', 'red', 'P')
+plottingLine(rateNNSupercase1, r'Proposed [Rank ($R_h$) = 1 for all UEs]', 'solid', 'blue', 'v')
+plottingLine(rateNNSupercase2, r'Proposed [Rank ($R_h$) = 2 for all UEs]', 'solid', 'red', 'P')
 
 # Legend
-plt.legend(loc='upper left', ncol=1, fontsize=13)
+plt.legend(loc='upper left', ncol=1, fontsize=15)
 plt.ylim([global_ymin, global_ymax])
 
 # Axes labels
 plt.rc('text', usetex=True)
-plt.xlabel(r'$P_{\mathrm{T}}/\sigma_n^2$ (dB)', fontsize=12)
-plt.ylabel('Approximate sum rate (bps/Hz)', fontsize=13)
+plt.xlabel(r'$P_{\mathrm{T}}/\sigma_n^2$ (dB)', fontsize=16)
+plt.ylabel('Approximate sum rate (bps/Hz)', fontsize=16)
 
 # Title
-plt.title(r'$N_t$ = {}, $N$ = {}, $M + K$ = {}'.format(Nt, N, totalUsers), fontsize=13)
+plt.title(r'$N_t$ = {}, $N$ = {}, $M + K$ = {}'.format(Nt, N, totalUsers), fontsize=16)
 
 plt.grid(True) 
 plt.tight_layout()  # Adjust layout to prevent clipping of legend
 #plt.savefig(f'Plotting/fig4.tiff')  
 plt.savefig(f'Plotting/fig4.png')  
-#plt.savefig('Plotting/fig4.eps', format='eps')
+plt.savefig('Plotting/fig4.eps', format='eps')
 plt.close()
 
 print("Done!")
