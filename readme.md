@@ -1,5 +1,7 @@
 # Optimization of Transmit Beamforming With Channel Covariances for MISO Downlink Assisted by Reconfigurable Intelligent Surfaces
 
+<p style="text-align: justify">We propose <mark>an unsupervised beamforming neural network (BNN)</mark> to optimize transmit beamforming in downlink multiple input single output (MISO) channels. Reconfigurable intelligent surface (RIS) panels are used to assist user equipment that does not receive sufficiently strong signals from the base station. To avoid frequent beam updates, the proposed BNN is based on slow-changing channel covariances and is different from most other BNNs that utilize instant channel state information. <mark>Numerical simulations show that the proposed BNN can achieve much higher sum rates</mark> than zeroforcing beamforming does when the system is heavily loaded and can drastically reduce computation time for large-scale communication systems.</p>
+
 ### System Model
 
 See the folder [sytemModel](./systemModel/fig1.png) to understand the custom Downlink Beamforming with Reconfigurable Intelligent Surface environment.
