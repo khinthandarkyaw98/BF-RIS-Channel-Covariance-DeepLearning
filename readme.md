@@ -4,11 +4,10 @@
 
 ### System Model
 
-See the folder [sytemModel](./systemModel/fig1.png) to understand the custom Downlink Beamforming with Reconfigurable Intelligent Surface environment.
+The implementation of the neural network model is adapted from [TianLin0509/BF-design-with-DL](https://github.com/TianLin0509/BF-design-with-DL) to meet our system requriements.
 
-The architecture of the proposed neural network model is shown as follows.
 > [!IMPORTANT]
-> For details, please view the paper [Insert URL]().
+> For details on the custom Downlink Beamforming with Reconfigurable Intelligent Surface environment, please refer to the paper: [](Insert URL).
 <div align="center">
   <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png">
 </div>
@@ -79,10 +78,7 @@ keras==2.15.0
   
 Eplased time info, Loss curves and sum rate plots can also be viewed in `timer`, `train` and  `Plotting` folders which will be automatically created after running the abovementioned files.
 
-### Using the code
-Please cite this repository if you utilize our code:
-```
-```
+
 
 
 
