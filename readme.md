@@ -30,7 +30,7 @@ Please modify `N`, `Nt`, `totalUsers`, `Lm`, `Lk` in [NNUtils.py](./NNUtils.py) 
 **0.Requirements**
 ```bash
 python==3.10.10
-matplotlib==3.7.1
+matplotlib==3.7.1s
 numpy==1.24.3
 tensorflow==2.15.0
 keras==2.15.0
