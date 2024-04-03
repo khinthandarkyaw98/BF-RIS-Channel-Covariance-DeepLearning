@@ -42,6 +42,17 @@ keras==2.15.0
     git clone https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning.git
     cd BF-RIS-Channel-Covariance-DeepLearning
     ```
+
+* Create a virtual environment
+    ```bash
+    python -m venv env
+    ```
+
+* Activate the virtual environment 
+    ```bash
+    source env/bin/activate
+    ```
+
 * Install Python requriements:
     ```bash
     pip install -r requirements.txt
