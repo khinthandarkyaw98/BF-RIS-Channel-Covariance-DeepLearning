@@ -25,7 +25,7 @@ Figures of the sum rates and computaion time in the paper are found in the folde
 
 Please modify `N`, `Nt`, `totalUsers`, `Lm`, `Lk` in [NNUtils.py](./NNUtils.py) and respective `python` `plot` files to reproduce all figures in the paper.
 
-### Run
+### How to use
 ***
 **0.Requirements**
 ```bash
