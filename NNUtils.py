@@ -19,8 +19,8 @@ def fiexdSNR():
   return snr
 
 def totalUsersFunc():
-  #totalUsers = [6, 8, 10]  # figure 2 and figure 3
-  totalUsers = [8] # figure 4
+  totalUsers = [6, 8, 10]  # figure 2 and figure 3
+  #totalUsers = [8] # figure 4
   return totalUsers
 
 def parameters(totalUser):
