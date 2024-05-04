@@ -3,7 +3,7 @@
 >[!NOTE]
 >[Manuscript Accepted]
 
-<div align="justify">Our proposed BNN utilizes only channel covariances of UEs, which do not change often, and hence the transmit beams do not need frequent updates. The BNN outperforms the ZF scheme when the UE channels are sparse with <b>rank one</b> covariance. The sum-rate gain over ZF is pronounced in heavily loaded systems in which the number of UEs is closer to that of the BS antennas. The complexity of the BNN is shown to be much lower than that of the ZF. Future work includes improving the BNN for channel covariances whose rank is greater than one and joint optimization of the transmit beams with RIS elements.</div>
+<div align="justify">We propose an <b>unsupervised</b> beamforming neural network (BNN) to optimize transmit beamforming in downlink multiple input single output (MISO) channels. Our proposed BNN utilizes only channel covariances of UEs, which do not change often, and hence the transmit beams do not need frequent updates. The BNN outperforms the ZF scheme when the UE channels are sparse with <b>rank one</b> covariance. The sum-rate gain over ZF is pronounced in heavily loaded systems in which the number of UEs is closer to that of the BS antennas. The complexity of the BNN is shown to be much lower than that of the ZF. Future work includes improving the BNN for channel covariances whose rank is greater than one and joint optimization of the transmit beams with RIS elements.</div>
 
 ### System Model
 ***
@@ -14,6 +14,48 @@ The implementation of the neural network model is adapted from [TianLin0509/BF-d
 <div align="center">
   <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png">
 </div>
+
+### Simulation Parameters
+|  Parameter |  Current Value | 
+|---|---|
+|  Number of UEs|  Default: 8 <br/> Otherwise: 6, or 10|  
+|  Number of BS transmit antenna ($N_t$)  | Default: 16 <br/> Otherwise: 10 |  
+|  Number of RIS elements ($N$) |  Default: 30 <br/> Otherwise: 60 | 
+|  Downlink bandwidth | Assume mmWave Frequencies > 30 GHz |
+|  Channel bandwidth |  Rayleigh Fading Model |
+|  Antenna configuration|  MISO |
+|  Frequency reuse scheme | Large Frequency Reuse Factor |
+|  Mobility model | Stationary |
+|  Learning type| Unsupervised |
+
+
+### Implementation Details of the proposed BNN
+| Layer Name | Output Dimension | Activation Function |
+|---|---|---|
+| Input layer 1 | [$M+K, 2, N_t, N_t$] |<center>-</center> |
+| Input layer 2 | [$1$] |<center>-</center> |
+| Input layer 3 | [$M+K, 2, N_t, 1$] |<center>-</center> |
+| Concatenate layer | [$2N_t(M+K)(N_t+1)+1, 1$] |<center>-</center> |
+| Dense layer 1 | [$256, 1$] |<center>softplus</center> |
+| Dense layer 2 | [$128, 1$] |<center>softplus</center> |
+| Dense layer 3 | [$64, 1$] |<center>softplus</center> |
+| Lambda layer 1 | [$32, 1$] |<center>-</center> |
+| Lambda layer 2 | [$32, 1$] |<center>-</center> |
+| Dense layer 4 | [$M+K, 1$] |<center>softplus</center> |
+| Dense layer 5 | [$M+K, 1$] |<center>softplus</center> |
+| Lambda layer 3 | [$M+K, 1$] |<center>-</center> |
+| Lambda layer 4 | [$M+K, 1$] |<center>-</center> |
+| Lambda layer 5 | [$M+K, N_t, 1$] |<center>-</center> |
+| Lambda layer 6 | [$1$] |<center>-</center> |
+
+### Training Hyperparameters of BNN
+| Hyperparameters | Value |
+|---|---|
+| Number of episodes | Maximum episodes = $500$ |
+| Mini-batch size | $32$ samples |
+| Network weight initializations | Keras' default wegihts |
+| Optimizer | Adam |
+| Learning rate | Maximium value = $1e-5$ <br/> Minimum value = $1e-7$ |
 
 ### Numerical Results
 ***
