@@ -35,7 +35,7 @@ The implementation of the neural network model is adapted from [TianLin0509/BF-d
 | Input layer 1 | [M+K, 2, $N_t$, $N_t$] |<center>-</center> |
 | Input layer 2 | [1] |<center>-</center> |
 | Input layer 3 | [M+K, 2, $N_t$, 1] |<center>-</center> |
-| Concatenate layer | [2$N_t$(M+K)($N_t$+1)+1, 1] |<center>-</center> |
+| Concatenate layer | [2 $N_t$ (M+K)($N_t$+1)+1, 1] |<center>-</center> |
 | Dense layer 1 | [256, 1] |<center>softplus</center> |
 | Dense layer 2 | [128, 1] |<center>softplus</center> |
 | Dense layer 3 | [64, 1] |<center>softplus</center> |
