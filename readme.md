@@ -32,21 +32,21 @@ The implementation of the neural network model is adapted from [TianLin0509/BF-d
 ### Implementation Details of the proposed BNN
 | Layer Name | Output Dimension | Activation Function |
 |---|---|---|
-| Input layer 1 | [$M+K$, $2$, $N_t$, $N_t$] |<center>-</center> |
-| Input layer 2 | [$1$] |<center>-</center> |
-| Input layer 3 | [$M+K$, $2$, $N_t$, $1$] |<center>-</center> |
-| Concatenate layer | [$2N_t(M+K)(N_t+1)+1$, $1$] |<center>-</center> |
-| Dense layer 1 | [$256$, $1$] |<center>softplus</center> |
-| Dense layer 2 | [$128$, $1$] |<center>softplus</center> |
-| Dense layer 3 | [$64$, $1$] |<center>softplus</center> |
-| Lambda layer 1 | [$32$, $1$] |<center>-</center> |
-| Lambda layer 2 | [$32$, $1$] |<center>-</center> |
-| Dense layer 4 | [$M+K$, $1$] |<center>softplus</center> |
-| Dense layer 5 | [$M+K$, $1$] |<center>softplus</center> |
-| Lambda layer 3 | [$M+K$, $1$] |<center>-</center> |
-| Lambda layer 4 | [$M+K$, $1$] |<center>-</center> |
-| Lambda layer 5 | [$M+K$, $N_t$, $1$] |<center>-</center> |
-| Lambda layer 6 | [$1$] |<center>-</center> |
+| Input layer 1 | [M+K, 2, $N_t$, $N_t$] |<center>-</center> |
+| Input layer 2 | [1] |<center>-</center> |
+| Input layer 3 | [M+K, 2, $N_t$, 1] |<center>-</center> |
+| Concatenate layer | [2$N_t$(M+K)($N_t$+1)+1, 1] |<center>-</center> |
+| Dense layer 1 | [256, 1] |<center>softplus</center> |
+| Dense layer 2 | [128, 1] |<center>softplus</center> |
+| Dense layer 3 | [64, 1] |<center>softplus</center> |
+| Lambda layer 1 | [32, 1] |<center>-</center> |
+| Lambda layer 2 | [32, 1] |<center>-</center> |
+| Dense layer 4 | [M+K, 1] |<center>softplus</center> |
+| Dense layer 5 | [M+K, 1] |<center>softplus</center> |
+| Lambda layer 3 | [M+K, 1] |<center>-</center> |
+| Lambda layer 4 | [M+K, 1] |<center>-</center> |
+| Lambda layer 5 | [M+K, $N_t$, 1] |<center>-</center> |
+| Lambda layer 6 | [1] |<center>-</center> |
 
 ### Training Hyperparameters of BNN
 | Hyperparameters | Value |
