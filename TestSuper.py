@@ -135,7 +135,7 @@ for userSize in totalUsers:
         np.save(self.save_path2, betak)
 
     # ------------------------------------
-    # Train the Model
+    # Load the Model
     # ------------------------------------
     model.load_weights(f'train/{userSize}users/trainedSuper.h5')
     saveOnEval = SavePowerBeta(f'test/{userSize}users/powerk.npy', 
