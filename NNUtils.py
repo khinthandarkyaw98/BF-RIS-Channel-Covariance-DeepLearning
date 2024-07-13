@@ -39,7 +39,8 @@ def parameters(totalUser):
     Lm = np.random.randint(1, 2, size=M) # Lm = path between BS and user
     #Lk = np.random.randint(2, 3, size=K)
     Lk = np.random.randint(1, 2, size=K) # Lk = path between IRS and user
-    Ltotal = np.random.randint(1, 2, size=totalUser) # Ltotal = path between BS/IRS and user
+    # Ltotal = np.random.randint(1, 2, size=totalUser) # Ltotal = path between BS/IRS and user
+    Ltotal = np.concatenate((Lm, Lk))
     if np.sum(Lm) + np.sum(Lk) <= Nt:
       break
     else:
