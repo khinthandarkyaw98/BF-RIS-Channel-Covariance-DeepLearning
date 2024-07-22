@@ -7,7 +7,7 @@ Last Modified  : 12 JAN 2024
 
 import time
 from nn_utils import *
-from covarianceUtils import *
+from covariance_utils import *
 from timer import *
   
 ########################################################################
