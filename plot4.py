@@ -8,16 +8,16 @@ Last Modified  : 15 Nov 2023
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
-from NNUtils import *
+from nn_utils import *
 
 # tf_version: 2.15.0
 print(tf.__version__)
 print("Loading...")
 
 # --------------------------- Start --------------------------------
-totalUsers = ''.join(map(str, totalUsersFunc()))
+total_users = ''.join(map(str, total_users()))
 Nt, N, _, _, _, _, _ = parameters(6) # 6 is just a placeholder
-snrFixed = fiexdSNR()
+snr_fixed = fixed_snr()
 
 
 global_ymin = 0
@@ -25,14 +25,14 @@ global_ymax = 60
 
 
 # load the data
-rateNNSupercase1 = np.load(f'Plotting/{totalUsers}users/sumRateSupercase1.npy')
-rateNNSupercase2 = np.load(f'Plotting/{totalUsers}users/sumRateSupercase2.npy')
+rate_NN_unsuper_case_1 = np.load(f'Plotting/{total_users}users/sumRateSupercase1.npy')
+rate_NN_unsuper_case_2 = np.load(f'Plotting/{total_users}users/sumRateSupercase2.npy')
 
-rateWFcase1 = np.load(f'Plotting/{totalUsers}users/sumRateWFcase1.npy')
-rateWFcase2 = np.load(f'Plotting/{totalUsers}users/sumRateWFcase2.npy')
+rateWFcase1 = np.load(f'Plotting/{total_users}users/sumRateWFcase1.npy')
+rateWFcase2 = np.load(f'Plotting/{total_users}users/sumRateWFcase2.npy')
 
 print('Loading...')
-linePrint()
+print_line()
 
 plt.rcParams['text.usetex'] = True
 plt.rcParams['text.latex.preamble'] = r'\usepackage{amsmath}'
@@ -41,10 +41,10 @@ plt.figure(figsize=(7, 6))
 
 # Plot lines
 #plottingLine(rateZF60, 'ZF-SBF [N = 60]', 'dotted', 'green', '+')
-plottingLine(rateWFcase1, r'ZF beam w/ WF pwr [Rank ($R_h$) = 1 for all UEs]', 'dashed', 'blue', 'v')
-plottingLine(rateWFcase2, r'ZF beam w/ WF pwr [Rank ($R_h$) = 2 for all UEs]', 'dashed', 'red', 'P')
-plottingLine(rateNNSupercase1, r'Proposed [Rank ($R_h$) = 1 for all UEs]', 'solid', 'blue', 'v')
-plottingLine(rateNNSupercase2, r'Proposed [Rank ($R_h$) = 2 for all UEs]', 'solid', 'red', 'P')
+plot_line(rateWFcase1, r'ZF beam w/ WF pwr [Rank ($R_h$) = 1 for all UEs]', 'dashed', 'blue', 'v')
+plot_line(rateWFcase2, r'ZF beam w/ WF pwr [Rank ($R_h$) = 2 for all UEs]', 'dashed', 'red', 'P')
+plot_line(rate_NN_unsuper_case_1, r'Proposed [Rank ($R_h$) = 1 for all UEs]', 'solid', 'blue', 'v')
+plot_line(rate_NN_unsuper_case_2, r'Proposed [Rank ($R_h$) = 2 for all UEs]', 'solid', 'red', 'P')
 
 # Legend
 plt.legend(loc='upper left', ncol=1, fontsize=15)
@@ -56,7 +56,7 @@ plt.xlabel(r'$P_{\mathrm{T}}/\sigma_n^2$ (dB)', fontsize=16)
 plt.ylabel('Approximate sum rate (bps/Hz)', fontsize=16)
 
 # Title
-plt.title(r'$N_t$ = {}, $N$ = {}, $M + K$ = {}'.format(Nt, N, totalUsers), fontsize=16)
+plt.title(r'$N_t$ = {}, $N$ = {}, $M + K$ = {}'.format(Nt, N, total_users), fontsize=16)
 
 plt.grid(True) 
 plt.tight_layout()  # Adjust layout to prevent clipping of legend

@@ -89,22 +89,22 @@ keras==2.15.0
 
 * Calculate the sum rate of ZF beams w/ water-filling pwr:
   ```bash 
-  python waterFilling.py
+  python water_filling.py
   ```
 
 * Train the model: 
   ```bash
-  python TrainSuper.py
+  python train_unsuper.py
   ```
 
 * Test the model:
   ```bash
-  python TestSuper.py
+  python test_unsuper.py
   ```
 
 * Check the elapsed time:
   ```bash 
-  python timerCalculation.py
+  python timer_calculation.py
   ```
   
 * Plotting the graph:

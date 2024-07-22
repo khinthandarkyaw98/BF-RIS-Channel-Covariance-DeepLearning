@@ -8,7 +8,7 @@ Last Modified  : 15 Nov 2023
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
-from NNUtils import *
+from nn_utils import *
 
 
 # tf_version: 2.15.0
@@ -16,7 +16,7 @@ print(tf.__version__)
 print("Loading...")
 
 # --------------------------- Start --------------------------------
-snrFixed = fiexdSNR()
+snr_fixed = fixed_snr()
 Nt, N, _, _, _, _, _ = parameters(6) # 6 is just a placeholder
 
 global_ymin = 0
@@ -24,20 +24,20 @@ global_ymax = 60
 
 
 # load the data
-rateNNSuper6 = np.load(f'Plotting/6users/sumRateSuper.npy')
+rate_NN_unsuper_6 = np.load(f'Plotting/6users/sumRateSuper.npy')
 #rateZF6 = np.load(f'Plotting/6users/sumRateZF.npy')
-rateWF6 = np.load(f'Plotting/6users/sumRateWF.npy')
+rate_WF_6 = np.load(f'Plotting/6users/sumRateWF.npy')
 
-rateNNSuper8 = np.load(f'Plotting/8users/sumRateSuper.npy')
+rate_NN_unsuper_8 = np.load(f'Plotting/8users/sumRateSuper.npy')
 #rateZF8 = np.load(f'Plotting/8users/sumRateZF.npy')
-rateWF8 = np.load(f'Plotting/8users/sumRateWF.npy')
+rate_WF_8 = np.load(f'Plotting/8users/sumRateWF.npy')
 
-rateNNSuper10 = np.load(f'Plotting/10users/sumRateSuper.npy')
+rate_NN_unsuper_10 = np.load(f'Plotting/10users/sumRateSuper.npy')
 #rateZF10 = np.load(f'Plotting/10users/sumRateZF.npy')
-rateWF10 = np.load(f'Plotting/10users/sumRateWF.npy')
+rate_WF_10 = np.load(f'Plotting/10users/sumRateWF.npy')
 
 print('Loading...')
-linePrint()
+print_line()
 
 plt.rcParams['text.usetex'] = True
 plt.rcParams['text.latex.preamble'] = r'\usepackage{amsmath}'
@@ -46,16 +46,16 @@ plt.figure(figsize=(7, 6))
 
 # Plot lines
 #plottingLine(rateZF6, 'ZF-SBF [M+K=6]', 'dotted', 'red', '+')
-plottingLine(rateNNSuper6, 'Proposed [M+K=6]', 'solid', 'red', 'P')
-plottingLine(rateWF6, 'ZF beam w/ WF pwr [M+K=6]', 'dashed', 'red', 'P')
+plot_line(rate_NN_unsuper_6, 'Proposed [M+K=6]', 'solid', 'red', 'P')
+plot_line(rate_WF_6, 'ZF beam w/ WF pwr [M+K=6]', 'dashed', 'red', 'P')
 
 #plottingLine(rateZF8, 'ZF-SBF [M+K=8]', 'dotted', 'green', '+')
-plottingLine(rateNNSuper8, 'Proposed [M+K=8]', 'solid', 'green', 'v')
-plottingLine(rateWF8, 'ZF beam w/ WF pwr [M+K=8]', 'dashed', 'green', 'v')
+plot_line(rate_NN_unsuper_8, 'Proposed [M+K=8]', 'solid', 'green', 'v')
+plot_line(rate_WF_8, 'ZF beam w/ WF pwr [M+K=8]', 'dashed', 'green', 'v')
 
 #plottingLine(rateZF10, 'ZF-SBF [M+K=10]', 'dotted', 'blue', '+')
-plottingLine(rateNNSuper10, 'Proposed [M+K=10]', 'solid', 'blue', 'd')
-plottingLine(rateWF10, 'ZF beam w/ WF pwr [M+K=10]', 'dashed', 'blue', 'd')
+plot_line(rate_NN_unsuper_10, 'Proposed [M+K=10]', 'solid', 'blue', 'd')
+plot_line(rate_WF_10, 'ZF beam w/ WF pwr [M+K=10]', 'dashed', 'blue', 'd')
 
 # Legend
 plt.legend(loc='upper left', ncol=1, fontsize=16)

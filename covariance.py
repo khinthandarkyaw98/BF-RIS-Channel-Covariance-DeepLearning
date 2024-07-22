@@ -6,7 +6,7 @@ Last Modified  : 12 JAN 2024
 """
 
 import time
-from NNUtils import *
+from nn_utils import *
 from covarianceUtils import *
 from timer import *
   
@@ -15,82 +15,82 @@ print('Generating covariance matrix...')
 print('Loading...')
 
 
-totalUsers = totalUsersFunc()
+total_users = total_users()
 
-for totalUser in totalUsers:
-  covarianceSample = []
-  eMaxSample = []
-  beamSample = []
-  absZFBFSample = []
-  sampleSize = 50000
-  trainSize = int(0.85 * sampleSize)
-  timeList = []
-  print(f'Total # of Users: {totalUser}')
-  linePrint()
-  for sample in range(sampleSize):
+for total_user in total_users:
+  covariance_sample = []
+  emax_sample = []
+  beam_sample = []
+  abs_ZFBF_sample = []
+  sample_size = 1000 #50000
+  train_size = int(0.85 * sample_size)
+  time_list = []
+  print(f'Total # of Users: {total_user}')
+  print_line()
+  for sample in range(sample_size):
     if sample % 1000 == 0:
       print(f'Generating {sample}th sample...')
-      linePrint()
+      print_line()
     # --------------------------------------------
     # new parameters for M and K for each sample
     # -------------------------------------------
-    Nt, N, M, K, Lm, Lk, Ltotal = parameters(totalUser)
-    covarianceClass = Covariance(Nt, N, totalUser, M, K, Lm, Lk, Ltotal)
+    Nt, N, M, K, Lm, Lk, Ltotal = parameters(total_user)
+    covariance_class = Covariance(Nt, N, total_user, M, K, Lm, Lk, Ltotal)
     
     # ------------------------------------
     # direct user channel
     # ------------------------------------
-    theta = covarianceClass.generate_theta()
-    steering_vectors = covarianceClass.generate_steering_vectors(theta)
-    channel_covariance = covarianceClass.generate_channel_covariance(steering_vectors)
+    theta = covariance_class.generate_theta()
+    steering_vectors = covariance_class.generate_steering_vectors(theta)
+    channel_covariance = covariance_class.generate_channel_covariance(steering_vectors)
     
     # ------------------------------------
     # IRS-assisted user channel
     # ------------------------------------
-    xi = covarianceClass.generate_xi()
-    upsilon = covarianceClass.generate_upsilon()
-    channelBsIrs = covarianceClass.generate_channelBSIRS(xi, upsilon)
-    big_theta = covarianceClass.generate_big_theta()
-    phi = covarianceClass.generate_phi()
-    steering_vectors_irs = covarianceClass.generate_steering_vectors_irs(phi)
+    xi = covariance_class.generate_xi()
+    upsilon = covariance_class.generate_upsilon()
+    channel_BS_IRS = covariance_class.generate_channelBSIRS(xi, upsilon)
+    big_theta = covariance_class.generate_big_theta()
+    phi = covariance_class.generate_phi()
+    steering_vectors_irs = covariance_class.generate_steering_vectors_irs(phi)
     #print(f'Rank of channel_covariance: {np.linalg.matrix_rank(channel_covariance)}')
-    channel_covariance_irs = covarianceClass.generate_channel_covariance_irs(steering_vectors_irs)
+    channel_covariance_irs = covariance_class.generate_channel_covariance_irs(steering_vectors_irs)
     #print(f'Rank of channel_covariance_irs: {np.linalg.matrix_rank(channel_covariance_irs)}')
-    channel_covariance_all = covarianceClass.generate_composite_channel_covariance(channelBsIrs, big_theta, channel_covariance_irs, channel_covariance)
+    channel_covariance_all = covariance_class.generate_composite_channel_covariance(channel_BS_IRS, big_theta, channel_covariance_irs, channel_covariance)
     #print(f'Rank of channel_covariance_irs_compostite: {np.linalg.matrix_rank(channel_covariance_irs_compostite)}')
-    covarianceSample.append(channel_covariance_all)
+    covariance_sample.append(channel_covariance_all)
     
     # save eigenvectors corresponding to the largest eigenvalues
-    eMax = covarianceClass.eMax(channel_covariance_all)
-    eMaxSample.append(eMax)
+    e_max = covariance_class.e_max(channel_covariance_all)
+    emax_sample.append(e_max)
     
     # save for zero-forcing
     # ------------------------------------
     # Count the time for ZFBF
     # ------------------------------------
-    if sample >= trainSize:
+    if sample >= train_size:
       with Timer() as timer:
-        U_tilde, W = performCalculations(covarianceClass, channel_covariance_all)
-        beamSample.append(W)
-      timeList.append(timer.elapsed_time)
+        U_tilde, W = perform_calculations(covariance_class, channel_covariance_all)
+        beam_sample.append(W)
+      time_list.append(timer.elapsed_time)
     # ------------------------------------
     else: 
-      U_tilde, W = performCalculations(covarianceClass, channel_covariance_all)
-      beamSample.append(W)
+      U_tilde, W = perform_calculations(covariance_class, channel_covariance_all)
+      beam_sample.append(W)
       
-    abs_ZFBF_res = covarianceClass.check_ZFBF_condition(U_tilde, W)
-    absZFBFSample.append(abs_ZFBF_res)
+    abs_ZFBF_res = covariance_class.check_ZFBF_condition(U_tilde, W)
+    abs_ZFBF_sample.append(abs_ZFBF_res)
       
-  covarianceSample= np.array(covarianceSample)
-  print(f'channel_covariance.shape: {covarianceSample.shape}')
+  covariance_sample= np.array(covariance_sample)
+  print(f'channel_covariance.shape: {covariance_sample.shape}')
 
-  eMaxSample = np.array(eMaxSample)
-  print(f'eMaxSample.shape: {eMaxSample.shape}')
+  emax_sample = np.array(emax_sample)
+  print(f'eMaxSample.shape: {emax_sample.shape}')
 
-  beamSample = np.array(beamSample)
-  print(f'beamSample.shape: {beamSample.shape}')
+  beam_sample = np.array(beam_sample)
+  print(f'beamSample.shape: {beam_sample.shape}')
 
-  absZFBFSample = np.array(absZFBFSample)
+  abs_ZFBF_sample = np.array(abs_ZFBF_sample)
   #print(f'absZFBFSample.shape: {absZFBFSample.shape}')
   #print(f'absZFBFSample[0]: {absZFBFSample[0]}')
 
@@ -98,7 +98,7 @@ for totalUser in totalUsers:
   # split the data
   # -----------------------------------
   # idx is an array of the sample_size
-  idx = np.arange(covarianceSample.shape[0])
+  idx = np.arange(covariance_sample.shape[0])
   # shuffle the idx
   np.random.shuffle(idx)
 
@@ -106,39 +106,39 @@ for totalUser in totalUsers:
 
   # save channel covariance
 
-  cov_train = covarianceSample[idx[:trainSize]]
-  cov_test = covarianceSample[idx[trainSize:]]
+  cov_train = covariance_sample[idx[:train_size]]
+  cov_test = covariance_sample[idx[train_size:]]
 
   print(f'cov_train.shape: {cov_train.shape}')
   print(f'cov_test.shape: {cov_test.shape}')
 
   # save eigenVectors corresponding to the largest eigenvalues
-  eMax_train = eMaxSample[idx[:trainSize]]
-  eMax_test = eMaxSample[idx[trainSize:]]
+  eMax_train = emax_sample[idx[:train_size]]
+  eMax_test = emax_sample[idx[train_size:]]
 
   print(f'eMax_train.shape: {eMax_train.shape}')
   print(f'eMax_test.shape: {eMax_test.shape}')
 
   # save beamforming vector
-  beam_test = beamSample[idx[trainSize:]]
+  beam_test = beam_sample[idx[train_size:]]
 
   print(f'beam_test.shape: {beam_test.shape}')
 
   print('Saving...')
           
   # Before saving, ensure the dircetory exists
-  ensure_dir(f'train/{totalUser}users/')
-  ensure_dir(f'test/{totalUser}users/')
+  ensure_dir(f'train/{total_user}users/')
+  ensure_dir(f'test/{total_user}users/')
   # Now, save the data.
-  np.save(f'train/{totalUser}users/cov_train.npy', cov_train) 
-  np.save(f'test/{totalUser}users/cov_test.npy', cov_test)
-  np.save(f'train/{totalUser}users/eMax_train.npy', eMax_train)
-  np.save(f'test/{totalUser}users/eMax_test.npy', eMax_test)
-  np.save(f'test/{totalUser}users/beamZF.npy', beam_test) # ZF beamforming
-  np.save(f'test/{totalUser}users/timeArrayZWF.npy', timeList) # W Time
-  np.save(f'train/{totalUser}users/absZFBFSample.npy', absZFBFSample) # ZF condition
+  np.save(f'train/{total_user}users/cov_train.npy', cov_train) 
+  np.save(f'test/{total_user}users/cov_test.npy', cov_test)
+  np.save(f'train/{total_user}users/eMax_train.npy', eMax_train)
+  np.save(f'test/{total_user}users/eMax_test.npy', eMax_test)
+  np.save(f'test/{total_user}users/beamZF.npy', beam_test) # ZF beamforming
+  np.save(f'test/{total_user}users/timeArrayZWF.npy', time_list) # W Time
+  np.save(f'train/{total_user}users/absZFBFSample.npy', abs_ZFBF_sample) # ZF condition
   print(f'Data saved successfully!')
-  linePrint()
+  print_line()
   
   # ------------------------------------
   # Calculate the sum rate of Zero-Forcing

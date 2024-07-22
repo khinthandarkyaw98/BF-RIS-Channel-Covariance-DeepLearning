@@ -10,10 +10,10 @@ from typing import Tuple
 
 class Covariance:
     
-  def __init__(self, Nt: int, N: int, totalUsers: int, M: int, K: int, Lm: np.ndarray, Lk: np.ndarray, Ltotal: np.ndarray) -> None:
+  def __init__(self, Nt: int, N: int, total_users: int, M: int, K: int, Lm: np.ndarray, Lk: np.ndarray, Ltotal: np.ndarray) -> None:
     self.Nt = Nt # Total No. of Tx-BS antennas
     self.N = N # Total No. of patches on each IRS
-    self.totalUsers = totalUsers # M + K
+    self.total_users = total_users # M + K
     self.M = M # Total No. of direct Users
     self.K = K # Total No. of IRS-assisted Users
     self.Lm = Lm # Array of No. of paths between BS and each user
@@ -59,7 +59,7 @@ class Covariance:
     return [np.random.uniform(0, 2 * np.pi, size=self.N).reshape(-1, 1) for k in range(self.K)]
   
   def generate_channelBSIRS(self, xi: np.ndarray, upsilon: np.ndarray)-> list:
-    channelBsIrs = []
+    channel_BS_IRS = []
     for k in range(self.K):
       G_k = np.empty((self.Nt, self.N), dtype = np.complex128)
       xi_k = xi[k]
@@ -69,10 +69,10 @@ class Covariance:
           # range starts from 0, so (nt -1) should be nt and (n - 1) should be n
           G_k[nt, n] = np.exp(1j * np.pi * nt * np.sin(xi_k[n]) * np.sin(upsilon_k[n])) * \
           np.exp(-1j * np.pi * n * np.sin(xi_k[n]) * np.sin(upsilon_k[n])) 
-      channelBsIrs.append(G_k)
+      channel_BS_IRS.append(G_k)
       # if k == 0:
       #   print(f'Norm of G_k: {np.linalg.norm(G_k, ord=2)}')
-    return channelBsIrs
+    return channel_BS_IRS
    
   def generate_big_theta(self)-> list:
     big_theta = []
@@ -132,7 +132,7 @@ class Covariance:
   # ------------------------------------
   # m and k in the followings are just m and k, not related to M and K
   
-  def eigVecCorrMaxEigVal(self, matrix: list)-> Tuple [list, list, list]:
+  def eig_vec_corr_max_eig_val(self, matrix: list)-> Tuple [list, list, list]:
     eigenvalues, eigenvectors = np.linalg.eigh(matrix)
     sorted_indices = np.argsort(eigenvalues)[::-1] # sort in the descending order
     sorted_eigenvalues = eigenvalues[sorted_indices] # reorder the eigenvalues
@@ -143,21 +143,21 @@ class Covariance:
     max_eigenvalue = sorted_eigenvalues[0]
     return ekMax, sorted_eigenvalues, sorted_eigenvectors, max_eigenvalue
   
-  def eMax(self, channel_covariance: list):
-    eMax = []
-    for m in range(self.totalUsers):
+  def e_max(self, channel_covariance: list):
+    e_max = []
+    for m in range(self.total_users):
       R_m = channel_covariance[m]
-      e_m_max, _, _, _ = self.eigVecCorrMaxEigVal(R_m)
-      eMax.append(e_m_max)
-    return eMax
+      e_m_max, _, _, _ = self.eig_vec_corr_max_eig_val(R_m)
+      e_max.append(e_m_max)
+    return e_max
   
   def eigen_decomposition_channel_covariance(self, channel_covariance: list)-> list:
     U = []
     U_Hermitian = []
     Lambda = []
-    for m in range(self.totalUsers):
+    for m in range(self.total_users):
       R_m = channel_covariance[m]
-      _, sorted_eigenvalues, sorted_eigenvectors, _ = self.eigVecCorrMaxEigVal(R_m)
+      _, sorted_eigenvalues, sorted_eigenvectors, _ = self.eig_vec_corr_max_eig_val(R_m)
       U_m = sorted_eigenvectors
       U_m_Hermitian = np.conjugate(sorted_eigenvectors).T
       U.append(U_m)
@@ -168,7 +168,7 @@ class Covariance:
   
   def extract_U_star(self, U:list)-> list:
     U_star = []
-    for m in range(self.totalUsers):
+    for m in range(self.total_users):
       U_star_m = U[m][:, :self.Ltotal[m]] # sorted eigenvectors [just take out in dimension (Nt, Lm)]
       U_star.append(U_star_m)
     return U_star
@@ -176,8 +176,8 @@ class Covariance:
   def construct_U_tilde(self, U_star: list)-> Tuple[list, int]:
     U_tilde = []
     size_U_tilde_col = []
-    for k in range(self.totalUsers):
-      indices_without_k = [m for m in range(self.totalUsers) if m!=k] # omit k
+    for k in range(self.total_users):
+      indices_without_k = [m for m in range(self.total_users) if m!=k] # omit k
       U_star_without_k = [U_star[idx] for idx in indices_without_k]
       U_tilde_k = np.hstack(U_star_without_k) # stack arrays horrizontally to form matrix : U_tilde2 = [U_star0, U_star1] for M = 3
       size_U_tilde_k_col = U_tilde_k.shape[1]
@@ -189,7 +189,7 @@ class Covariance:
     Sigma = []
     E_1 = []
     E_0 = []
-    for m in range(self.totalUsers):
+    for m in range(self.total_users):
       E_k, Sigma_k, V_h_k = np.linalg.svd(U_tilde[m])
       Sigma.append(Sigma_k)
       E_k_1 = E_k[:, :size_U_tilde_k_col[m]]
@@ -200,16 +200,16 @@ class Covariance:
   
   def project_channel_covariance_onto_E_0(self, E_0: list, channel_covariance: list)-> list:
     V_max = []
-    for m in range(self.totalUsers):
+    for m in range(self.total_users):
       E_m_0_h = np.conjugate(E_0[m]).T
       resulted_matrix = E_m_0_h @ channel_covariance[m] @ E_0[m]
-      V_m_max, _, _, _ = self.eigVecCorrMaxEigVal(resulted_matrix)
+      V_m_max, _, _, _ = self.eig_vec_corr_max_eig_val(resulted_matrix)
       V_max.append(V_m_max)
     return V_max
   
   def calculate_beamforming_vector(self, E_0: list, V_max: list)-> list:
     w = []
-    for m in range(self.totalUsers):
+    for m in range(self.total_users):
       w_m = E_0[m] @ V_max[m]
       w.append(w_m)
     return w
@@ -217,7 +217,7 @@ class Covariance:
   def check_ZFBF_condition(self, U_tilde: list, w:list)-> list:
     ZFBF_res = []
     abs_ZFBF_res = []
-    for m in range(self.totalUsers):
+    for m in range(self.total_users):
       U_tilde_m_Hermitian = np.conjugate(U_tilde[m]).T
       output = U_tilde_m_Hermitian @ w[m]
       ZFBF_res.append(output)
