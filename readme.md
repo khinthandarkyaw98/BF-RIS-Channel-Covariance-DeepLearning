@@ -25,7 +25,7 @@ The implementation of the neural network model is adapted from [TianLin0509/BF-d
 
 > [!IMPORTANT]
 > For details on the custom Downlink Beamforming with Reconfigurable Intelligent Surface environment, please refer to the paper: 
-### K. T. Kyaw, W. Santipach, K. Mamat, K. Kaemarungsi and K. Fukawa [ "Optimization of Transmit Beamforming Using Channel Covariances for MISO Downlink Assisted by Reconfigurable Intelligent Surfaces,"](https://ieeexplore.ieee.org/document/10595028).
+### K. T. Kyaw, W. Santipach, K. Mamat, K. Kaemarungsi and K. Fukawa [ "Optimization of Transmit Beamforming Using Channel Covariances for MISO Downlink Assisted by Reconfigurable Intelligent Surfaces"](https://ieeexplore.ieee.org/document/10595028), in _2024 21st International Conference on Electrical Engineering/Electronics, Computer, Telecommunications and Information Technology (ECTI-CON)_.
 <div align="center">
   <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png">
 </div>
