@@ -1,7 +1,21 @@
 # Optimization of Transmit Beamforming With Channel Covariances for MISO Downlink Assisted by Reconfigurable Intelligent Surfaces 
 
->[!NOTE]
->[Manuscript Accepted]
+## Citation
+```
+@INPROCEEDINGS{10595028,
+  author={Kyaw, Khin Thandar and Santipach, Wiroonsak and Mamat, Kritsada and Kaemarungsi, Kamol and Fukawa, Kazuhiko},
+  booktitle={2024 21st International Conference on Electrical Engineering/Electronics, Computer, Telecommunications and Information Technology (ECTI-CON)}, 
+  title={Optimization of Transmit Beamforming Using Channel Covariances for MISO Downlink Assisted by Reconfigurable Intelligent Surfaces}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={1-6},
+  keywords={Array signal processing;Neural networks;Reconfigurable intelligent surfaces;MISO communication;Downlink;Numerical simulation;Telecommunications;Beamforming;optimization;downlink;RIS;channel covariance;MISO;neural network},
+  doi={10.1109/ECTI-CON60892.2024.10595028}}
+```
+
+-----
+
 
 <div align="justify">We propose an <b>unsupervised</b> beamforming neural network (BNN) to optimize transmit beamforming in downlink multiple input single output (MISO) channels. Our proposed BNN utilizes only channel covariances of UEs, which do not change often, and hence the transmit beams do not need frequent updates. The BNN outperforms the ZF scheme when the UE channels are sparse with <b>rank one</b> covariance. The sum-rate gain over ZF is pronounced in heavily loaded systems in which the number of UEs is closer to that of the BS antennas. The complexity of the BNN is shown to be much lower than that of the ZF. Future work includes improving the BNN for channel covariances whose rank is greater than one and joint optimization of the transmit beams with RIS elements.</div>
 
@@ -10,7 +24,8 @@
 The implementation of the neural network model is adapted from [TianLin0509/BF-design-with-DL](https://github.com/TianLin0509/BF-design-with-DL) to meet our system requriements.
 
 > [!IMPORTANT]
-> For details on the custom Downlink Beamforming with Reconfigurable Intelligent Surface environment, please refer to the paper: K. T. Kyaw, W. Santipach, K. Mamat, K. Kaemarungsi and K. Fukawa [ "Optimization of Transmit Beamforming Using Channel Covariances for MISO Downlink Assisted by Reconfigurable Intelligent Surfaces,"](https://ieeexplore.ieee.org/document/10595028) 2024 21st International Conference on Electrical Engineering/Electronics, Computer, Telecommunications and Information Technology (ECTI-CON), Khon Kaen, Thailand, 2024, pp. 1-6, doi: 10.1109/ECTI-CON60892.2024.10595028.
+> For details on the custom Downlink Beamforming with Reconfigurable Intelligent Surface environment, please refer to the paper: 
+### K. T. Kyaw, W. Santipach, K. Mamat, K. Kaemarungsi and K. Fukawa [ "Optimization of Transmit Beamforming Using Channel Covariances for MISO Downlink Assisted by Reconfigurable Intelligent Surfaces,"](https://ieeexplore.ieee.org/document/10595028).
 <div align="center">
   <img src="https://github.com/khinthandarkyaw98/BF-RIS-Channel-Covariance-DeepLearning/blob/main/systemModel/fig1.png">
 </div>
